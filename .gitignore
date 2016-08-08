@@ -1,0 +1,8 @@
+.DS_Store
+.ftpconfig
+*.log
+*~
+
+node_modules
+
+/config.js

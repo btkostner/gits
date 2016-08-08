@@ -1,0 +1,37 @@
+{
+  "name": "gits",
+  "version": "0.0.1",
+  "description": "a stupid simple github pull / sync script",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "node lib/index.js",
+    "lint": "standard",
+    "test": "standard && ava"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "debug": "^2.2.0",
+    "nodegit": "^0.14.1"
+  },
+  "devDependencies": {
+    "ava": "^0.15.2",
+    "standard": "^7.1.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/btkostner/gits.git"
+  },
+  "keywords": [
+    "git",
+    "github",
+    "clone",
+    "sync",
+    "pull"
+  ],
+  "author": "Blake Kostner (btkostner.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/btkostner/gits/issues"
+  },
+  "homepage": "https://github.com/btkostner/gits#readme"
+}
