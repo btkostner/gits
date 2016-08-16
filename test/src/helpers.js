@@ -1,5 +1,5 @@
 /**
-* test/helpers.js
+* test/src/helpers.js
 * Tests the ability of helper functions
 */
 

@@ -1,5 +1,5 @@
 /**
-* lib.server.js
+* src/server.js
 * Starts the github hook server
 *
 * @exports {Object} http - http server already listening
@@ -112,19 +112,21 @@ const handler = (req, res) => {
       return
     }
 
-    let signature = req.headers['x-hub-signature']
-    if (signature == null) {
-      log('Request did not send a signature. Assuming insecure')
-      reply(res, 403, 'Sent without a signature')
-      return
-    }
-    signature = signature.replace(/^sha1=/, '')
+    if (project.secret) {
+      if (req.headers['x-hub-signature'] == null) {
+        log('Request did not send a signature. Assuming insecure')
+        reply(res, 403, 'Sent without a signature')
+        return
+      }
 
-    const digest = crypto.createHmac('sha1', project.secret).update(data).digest('hex')
-    if (signature !== digest) {
-      log('Signature and digest do not match!')
-      reply(res, 403)
-      return
+      const signature = req.headers['x-hub-signature'].replace(/^sha1=/, '')
+      const digest = crypto.createHmac('sha1', project.secret).update(data).digest('hex')
+
+      if (signature !== digest) {
+        log('Signature and digest do not match!')
+        reply(res, 403)
+        return
+      }
     }
 
     const type = req.headers['x-github-event']
@@ -134,7 +136,7 @@ const handler = (req, res) => {
       return
     }
 
-    server.emit('*', pkg, project)
+    server.emit('any', type, pkg, project)
     server.emit(type, pkg, project)
 
     reply(res, 200)
@@ -142,7 +144,7 @@ const handler = (req, res) => {
   })
 }
 
-http.createServer(handler).listen(config.port, config.host, () => {
+http.createServer(handler).listen(config.port, '::', () => {
   log(`Started listening at ${config.host}:${config.port}`)
 })
 

@@ -1,5 +1,5 @@
 /**
- * lib/helpers.js
+ * src/helpers.js
  * Some useful functions
  *
  * @exports {Function} mkdirp - creates a nested directory
@@ -64,46 +64,28 @@ const rmr = (p) => {
  * Gets git repository to the latest branch
  * FIXME: this leaves the repo in a detached head state
  *
- * @param {Object} p - project configuration
- * @param {String} b - name of branch
+ * @param {String} pa - full path of the new branch
+ * @param {Object} pr - project configuration object
+ * @param {String} br - name of branch to get to
  */
-const gitto = (p, b) => {
-  const pr = util.format(p.path, b)
+const gitto = (pa, pr, br) => {
   let repo = null
 
-  return mkdirp(pr)
-  .then(() => {
-    return git.Repository.open(pr)
-    .catch(() => {
-      log(`Creating new git repository "${p.repo}#${b}"`)
-      return git.Clone(`https://github.com/${p.owner}/${p.repo}.git`, pr)
-    })
+  return git.Repository.open(pa)
+  .catch(() => {
+    log(`Creating new git repository "${pr.repo}#${br}"`)
+    return git.Clone(`https://github.com/${pr.owner}/${pr.repo}.git`, pa)
   })
   .then((r) => { repo = r })
   .then(() => repo.fetchAll())
-  .then(() => repo.getReference(`origin/${b}`))
+  .then(() => repo.getReference(`origin/${br}`))
   .then((ref) => repo.checkoutRef(ref, {
     checkoutStrategy: git.Checkout.STRATEGY.USE_THEIRS
   }))
 }
 
-/**
- * exec
- * Runs a script in a child process
- * TODO: complete exec function
- *
- * @param {String} p - path to script to run
- * @returns {String} - log of process
- */
-const exec = (p) => {
-  return new Promise((resolve, reject) => {
-    return resolve()
-  })
-}
-
 module.exports = {
   mkdirp,
   rmr,
-  gitto,
-  exec
+  gitto
 }

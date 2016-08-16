@@ -10,10 +10,10 @@ module.exports = {
   host: '0.0.0.0',
 
   projects: [{
-    owner: 'elementary',
+    owner: 'btkostner',
     repo: 'mvp',
-    secret: 'testing',
-    path: '/tmp/mvp/%s',
-    script: false
+    secret: null,
+    folder: '/tmp/mvp',
+    type: 'static'
   }]
 }
