@@ -7,7 +7,7 @@ const debug = require('debug')
 const path = require('path')
 
 const helpers = require('../src/helpers')
-const log = debug('gits:php')
+const log = debug('gits:static')
 
 /**
  * push

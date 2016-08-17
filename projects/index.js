@@ -5,4 +5,5 @@
 
 module.exports = {}
 
+module.exports['npm-build'] = require('./npm-build')
 module.exports['static'] = require('./static')

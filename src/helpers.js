@@ -8,14 +8,13 @@
  * @exports {Function} exec - runs a script in child process
  */
 
-const debug = require('debug')
+const child = require('child_process')
 const git = require('nodegit')
+const os = require('os')
 const path = require('path')
 const Promise = require('bluebird')
-const util = require('util')
 
 const fs = Promise.promisifyAll(require('fs'))
-const log = debug('gits:helpers')
 
 /**
  * mkdirp
@@ -60,6 +59,24 @@ const rmr = (p) => {
 }
 
 /**
+ * exec
+ * Runs a command
+ *
+ * @param {String} c - the command to run
+ * @param [String] p - the path run the command in
+ */
+const exec = (c, p = os.tmpdir()) => {
+  return new Promise((resolve, reject) => {
+    child.exec(c, {
+      cwd: p
+    }, (err, stdout, stderr) => {
+      if (err) return reject(err)
+      return resolve()
+    })
+  })
+}
+
+/**
  * gitto
  * Gets git repository to the latest branch
  * FIXME: this leaves the repo in a detached head state
@@ -69,23 +86,21 @@ const rmr = (p) => {
  * @param {String} br - name of branch to get to
  */
 const gitto = (pa, pr, br) => {
-  let repo = null
-
-  return git.Repository.open(pa)
-  .catch(() => {
-    log(`Creating new git repository "${pr.repo}#${br}"`)
-    return git.Clone(`https://github.com/${pr.owner}/${pr.repo}.git`, pa)
-  })
-  .then((r) => { repo = r })
-  .then(() => repo.fetchAll())
-  .then(() => repo.getReference(`origin/${br}`))
-  .then((ref) => repo.checkoutRef(ref, {
-    checkoutStrategy: git.Checkout.STRATEGY.USE_THEIRS
+  return mkdirp(pa)
+  .then(() => fs.statAsync(path.resolve(pa, '.git')))
+  .catch({ code: 'ENOENT' }, () => git.Clone(`https://github.com/${pr.owner}/${pr.repo}.git`, pa, {
+    checkoutBranch: br
   }))
+  .then(() => git.Repository.open(pa))
+  .then((repo) => {
+    return repo.fetch('origin')
+    .then(() => repo.mergeBranches(br, `origin/${br}`))
+  })
 }
 
 module.exports = {
   mkdirp,
   rmr,
-  gitto
+  gitto,
+  exec
 }

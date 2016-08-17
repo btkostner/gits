@@ -5,7 +5,7 @@
 
 const test = require('ava')
 
-const helpers = require('../lib/helpers')
+const helpers = require('../../src/helpers')
 
 test('able to make and remove a folder', (t) => {
   t.notThrows(
