@@ -10,7 +10,6 @@
 
 const child = require('child_process')
 const git = require('nodegit')
-const os = require('os')
 const path = require('path')
 const Promise = require('bluebird')
 
@@ -65,7 +64,7 @@ const rmr = (p) => {
  * @param {String} c - the command to run
  * @param [String] p - the path run the command in
  */
-const exec = (c, p = os.tmpdir()) => {
+const exec = (c, p) => {
   return new Promise((resolve, reject) => {
     child.exec(c, {
       cwd: p
