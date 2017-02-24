@@ -9,9 +9,36 @@
 			"Rev": "a437dfd2463eaedbec3dfe443e477d3b0a810b3f"
 		},
 		{
+			"ImportPath": "github.com/dimfeld/httppath",
+			"Rev": "c8e499c3ef3c3e272ed8bdcc1ccf39f73c88debc"
+		},
+		{
+			"ImportPath": "github.com/dimfeld/httptreemux",
+			"Comment": "v3.5.1",
+			"Rev": "5cb0ec25af2dd6a7d3718b5aa05dc48e192473bc"
+		},
+		{
 			"ImportPath": "github.com/fsnotify/fsnotify",
 			"Comment": "v1.4.2-1-gbd2828f",
 			"Rev": "bd2828f9f176e52d7222e565abb2d338d3f3c103"
+		},
+		{
+			"ImportPath": "github.com/google/go-github/github",
+			"Rev": "ed33550bbf49ddffcc36e1309d3f58ed0b6c2305"
+		},
+		{
+			"ImportPath": "github.com/google/go-querystring/query",
+			"Rev": "9235644dd9e52eeae6fa48efd539fdc351a0af53"
+		},
+		{
+			"ImportPath": "github.com/guregu/kami",
+			"Comment": "v2.2.0-3-g8445036",
+			"Rev": "8445036d16e509ed51026028485a7cf3f5e975de"
+		},
+		{
+			"ImportPath": "github.com/guregu/kami/treemux",
+			"Comment": "v2.2.0-3-g8445036",
+			"Rev": "8445036d16e509ed51026028485a7cf3f5e975de"
 		},
 		{
 			"ImportPath": "github.com/hashicorp/hcl",
@@ -117,6 +144,26 @@
 			"Rev": "50515b700e02658272117a72bd641b6b7f1222e5"
 		},
 		{
+			"ImportPath": "github.com/zenazn/goji/bind",
+			"Comment": "v1.0-1-g4d70779",
+			"Rev": "4d7077956293261309684d3cf1af673f773c6819"
+		},
+		{
+			"ImportPath": "github.com/zenazn/goji/graceful",
+			"Comment": "v1.0-1-g4d70779",
+			"Rev": "4d7077956293261309684d3cf1af673f773c6819"
+		},
+		{
+			"ImportPath": "github.com/zenazn/goji/graceful/listener",
+			"Comment": "v1.0-1-g4d70779",
+			"Rev": "4d7077956293261309684d3cf1af673f773c6819"
+		},
+		{
+			"ImportPath": "github.com/zenazn/goji/web/mutil",
+			"Comment": "v1.0-1-g4d70779",
+			"Rev": "4d7077956293261309684d3cf1af673f773c6819"
+		},
+		{
 			"ImportPath": "golang.org/x/crypto/curve25519",
 			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
 		},
@@ -131,6 +178,10 @@
 		{
 			"ImportPath": "golang.org/x/crypto/ssh",
 			"Rev": "c367d6eeb7c6158125f2f47e049f7eb7e251c09a"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "f09c4662a0bd6bd8943ac7b4931e185df9471da4"
 		},
 		{
 			"ImportPath": "golang.org/x/sys/unix",
